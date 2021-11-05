@@ -57,7 +57,7 @@ def main():
     row_groups = crawl_row_groups(soup, color_panel)
     col_groups = crawl_col_groups(soup, color_panel)
     m, n = len(row_groups), len(col_groups)  # size of the puzzle
-    with open(f'{puzzle_id}.txt', 'w') as f:
+    with open(f'../puzzle/{puzzle_id}.txt', 'w') as f:
         color_cnt = len(color_panel)
         f.write(str(color_cnt) + '\n')
         for k in color_panel:
