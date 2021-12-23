@@ -50,30 +50,32 @@ def main():
     op.add_argument('headless')
 
     driver = webdriver.Chrome(options=op)
-    driver.get(f'https://www.nonograms.org/nonograms2/i/{puzzle_id}')
+    black_white_puzzle_url = 'https://www.nonograms.org/nonograms/i/'
+    # driver.get(f'https://www.nonograms.org/nonograms2/i/{puzzle_id}')
+
+    driver.get(black_white_puzzle_url + puzzle_id)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
-    color_panel = crawl_color_panel(soup)
+    # color_panel = crawl_color_panel(soup)
+    color_panel = 
     row_groups = crawl_row_groups(soup, color_panel)
     col_groups = crawl_col_groups(soup, color_panel)
     m, n = len(row_groups), len(col_groups)  # size of the puzzle
-    with open(f'../puzzle/{puzzle_id}.txt', 'w') as f:
-        color_cnt = len(color_panel)
-        f.write(str(color_cnt) + '\n')
+    with open(f'./puzzle/{puzzle_id}.txt', 'w') as f:
         for k in color_panel:
             f.write(f'{k}\n')
-        f.write(f'\n{m} {n} \n\n')
+        f.write(f'-\n')
 
         for row_group in row_groups:
             for x, y in row_group:
-                f.write(f'{x} {y} ')
+                f.write(f'{x}:{y},')
             f.write('\n')
 
-        f.write('\n')
+        f.write('-\n')
 
         for col_group in col_groups:
             for x, y in col_group:
-                f.write(f'{x} {y} ')
+                f.write(f'{x}:{y},')
             f.write('\n')
 
 
